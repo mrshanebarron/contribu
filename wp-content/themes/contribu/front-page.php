@@ -48,13 +48,7 @@
 <!-- Trusted By Numbers -->
 <section class="section-sm" style="background: var(--white); border-bottom: 1px solid var(--border-light);">
     <div class="container">
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center;" x-data="{ shown: false }" x-init="
-            var el = $el;
-            var observer = new IntersectionObserver(function(entries) {
-                if (entries[0].isIntersecting) { shown = true; observer.disconnect(); }
-            }, { threshold: 0.3 });
-            observer.observe(el);
-        ">
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center;" x-data="{ shown: false }" x-init="let o = new IntersectionObserver(e => { if(e[0].isIntersecting){ shown=true; o.disconnect() } }, {threshold:0.3}); o.observe($el)">
             <div>
                 <div style="font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--sage);" x-text="shown ? '2,500+' : '0'">2,500+</div>
                 <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Registries Created</div>
