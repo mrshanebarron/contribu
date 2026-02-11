@@ -48,21 +48,27 @@
 <!-- Trusted By Numbers -->
 <section class="section-sm" style="background: var(--white); border-bottom: 1px solid var(--border-light);">
     <div class="container">
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center;" x-data="{ shown: false }" x-intersect.once="shown = true">
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center;" x-data="{ shown: false }" x-init="
+            var el = $el;
+            var observer = new IntersectionObserver(function(entries) {
+                if (entries[0].isIntersecting) { shown = true; observer.disconnect(); }
+            }, { threshold: 0.3 });
+            observer.observe(el);
+        ">
             <div>
-                <div style="font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--sage);" x-text="shown ? '2,500+' : '0'">0</div>
+                <div style="font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--sage);" x-text="shown ? '2,500+' : '0'">2,500+</div>
                 <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Registries Created</div>
             </div>
             <div>
-                <div style="font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--sage);" x-text="shown ? '$1.8M' : '0'">0</div>
+                <div style="font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--sage);" x-text="shown ? '$1.8M' : '0'">$1.8M</div>
                 <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Gifts Funded</div>
             </div>
             <div>
-                <div style="font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--sage);" x-text="shown ? '15,000+' : '0'">0</div>
+                <div style="font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--sage);" x-text="shown ? '15,000+' : '0'">15,000+</div>
                 <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Happy Contributors</div>
             </div>
             <div>
-                <div style="font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--sage);" x-text="shown ? '4.9/5' : '0'">0</div>
+                <div style="font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--sage);" x-text="shown ? '4.9/5' : '0'">4.9/5</div>
                 <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Couple Rating</div>
             </div>
         </div>

@@ -48,7 +48,9 @@
     </div>
 </footer>
 
-<!-- Alpine.js -->
+<!-- Alpine.js + Intersect plugin -->
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 <!-- GSAP + ScrollTrigger -->
@@ -58,19 +60,20 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     gsap.registerPlugin(ScrollTrigger);
+    document.body.classList.add('gsap-ready');
 
-    // Reveal animations
+    // Reveal animations — use autoAlpha (visibility + opacity)
     document.querySelectorAll('.reveal').forEach(function(el) {
         var rect = el.getBoundingClientRect();
         if (rect.top < window.innerHeight) {
-            gsap.fromTo(el, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' });
+            gsap.fromTo(el, { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power2.out' });
         } else {
             ScrollTrigger.create({
                 trigger: el,
                 start: 'top 88%',
                 once: true,
                 onEnter: function() {
-                    gsap.fromTo(el, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' });
+                    gsap.fromTo(el, { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power2.out' });
                 }
             });
         }
